@@ -1,7 +1,7 @@
 var es = require('event-stream');
 var gutil = require('gulp-util');
 var Buffer = require('buffer').Buffer;
-var jstransform = require('jstransform');
+var jstransform = require('jstransform/simple');
 
 module.exports = function(opt){
   function modifyFile(file){
@@ -13,7 +13,7 @@ module.exports = function(opt){
     } 
     // Influenced by https://github.com/stoyan/etc/master/es6r/es6r.js
     var str = file.contents.toString('utf8');
-    var visitors = [];
+    /* var visitors = [];
     [
       require('jstransform/visitors/es6-arrow-function-visitors'),
       require('jstransform/visitors/es6-class-visitors'),
@@ -23,9 +23,9 @@ module.exports = function(opt){
       require('jstransform/visitors/es6-template-visitors')
     ].forEach(function(visitor) {
       visitors = visitors.concat(visitor.visitorList);
-    });
-   
-    var converted = jstransform.transform(visitors, str);
+    }); */
+    
+    var converted = jstransform.transform(str, opt);
     file.contents = new Buffer(converted.code);
     this.emit('data', file);
   }
