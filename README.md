@@ -20,3 +20,16 @@ gulp.task('jstransform', function() {
     .pipe(gulp.dest('./public/'))
 });
 ```
+## ES5/ES3 targets test:
+
+```javascript
+class Foo {
+  title() {
+    return 42;
+  }
+}
+```
+
+## Fork reason
+
+es3/es5 switching support (missing in Babel too)
